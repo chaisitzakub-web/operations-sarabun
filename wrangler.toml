@@ -1,0 +1,11 @@
+# Cloudflare Pages & D1 Database Configuration File
+
+name = "e-sarabun-cloud"
+pages_build_output_dir = "."
+compatibility_date = "2026-07-22"
+
+# Cloudflare D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "esarabun-db"
+database_id = "YOUR_CLOUDFLARE_D1_DATABASE_ID" # Will be updated automatically or via wrangler cli

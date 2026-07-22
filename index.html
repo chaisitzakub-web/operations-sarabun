@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบสารบรรณดิจิทัล (e-Sarabun Cloud)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@300;400;500;600;700&family=TH+Sarabun+PSK:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <svg class="garuda-icon" viewBox="0 0 300 300">
+        <path fill="currentColor" d="M150,20 C160,40 180,50 200,45 C190,65 210,80 230,75 C210,95 235,110 250,115 C230,130 215,150 190,140 C195,160 175,170 150,175 C125,170 105,160 110,140 C85,150 70,130 50,115 C65,110 90,95 70,75 C90,80 110,65 100,45 C120,50 140,40 150,20 Z"/>
+      </svg>
+      <span>ระบบสารบรรณดิจิทัล (e-Sarabun Cloud)</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-item active" data-view="dashboard">📊 ติดตามสถานะ & ติดตามเรื่อง</a>
+      <a class="nav-item" data-view="draft">📝 ร่างหนังสือ / แม่แบบ</a>
+      <a class="nav-item" data-view="archive">📁 แฟ้มจัดเก็บ (e-Archive)</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    
+    <!-- VIEW 1: DASHBOARD & SEARCH -->
+    <div id="view-dashboard" class="view-panel">
+      <!-- Live Stats Cards -->
+      <div class="grid-stats">
+        <div class="stat-card" onclick="setDocFilter('ALL')" style="cursor:pointer;">
+          <div class="stat-icon bg-blue">📄</div>
+          <div>
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">หนังสือทั้งหมดในระบบ</div>
+          </div>
+        </div>
+        <div class="stat-card" onclick="setDocFilter('REVIEW')" style="cursor:pointer;">
+          <div class="stat-icon bg-yellow">⏳</div>
+          <div>
+            <div class="stat-value" id="stat-pending">0</div>
+            <div class="stat-label">รอตรวจ/ลงนาม (Action Needed)</div>
+          </div>
+        </div>
+        <div class="stat-card" onclick="setDocFilter('COMPLETED')" style="cursor:pointer;">
+          <div class="stat-icon bg-green">✓</div>
+          <div>
+            <div class="stat-value" id="stat-completed">0</div>
+            <div class="stat-label">อนุมัติเรียบร้อย/จัดเก็บแล้ว</div>
+          </div>
+        </div>
+        <div class="stat-card" onclick="setDocFilter('REJECTED')" style="cursor:pointer;">
+          <div class="stat-icon bg-red">↩️</div>
+          <div>
+            <div class="stat-value" id="stat-rejected">0</div>
+            <div class="stat-label">ถูกตีกลับแก้ไข (Reject)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Document Table Card -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📂 รายการหนังสือและสถานะเสนอเรื่อง Real-time</h2>
+          <div style="display:flex; gap:12px;">
+            <input type="text" id="search-input" class="btn" style="border:1px solid var(--border-color); width:280px;" placeholder="🔍 ค้นหาเลขที่, เรื่อง, ผู้ลงนาม...">
+            <button class="btn btn-primary" onclick="switchView('draft')">➕ ร่างหนังสือใหม่</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>เลขที่หนังสือ</th>
+                <th>เรื่อง / ส่วนราชการ</th>
+                <th>ประเภท</th>
+                <th>ความด่วน</th>
+                <th>สถานะปัจจุบัน</th>
+                <th>วันที่ลงรับ/เสนอ</th>
+                <th>การจัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="doc-table-body">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: DRAFT & CREATE DOCUMENT -->
+    <div id="view-draft" class="view-panel" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📝 ร่างเอกสารใหม่ & เลือกแม่แบบมาตรฐาน</h2>
+          <button class="btn btn-secondary" onclick="switchView('dashboard')">⬅️ กลับหน้าหลัก</button>
+        </div>
+
+        <form onsubmit="handleCreateDoc(event)">
+          <div style="margin-bottom:20px; background:var(--primary-light); padding:16px; border-radius:8px;">
+            <label style="font-weight:600; margin-right:12px;">⚡ เลือกแม่แบบฟอร์มมาตรฐาน (Template):</label>
+            <select id="template-select" style="padding:8px 12px; border-radius:6px; border:1px solid var(--border-color); font-family:var(--font-family);">
+              <option value="">-- เลือกแบบฟอร์ม --</option>
+              <option value="internal_memo">บันทึกข้อความ (หนังสือภายใน)</option>
+              <option value="external_letter">หนังสือภายนอก (ตราครุฑ)</option>
+              <option value="official_command">คำสั่ง / ประกาศ</option>
+            </select>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px;">
+            <div>
+              <label>เลขที่หนังสือ:</label>
+              <input type="text" id="form-doc-no" class="btn" style="width:100%; border:1px solid var(--border-color);" required>
+            </div>
+            <div>
+              <label>ส่วนราชการ/เจ้าของเรื่อง:</label>
+              <input type="text" id="form-dept-name" class="btn" style="width:100%; border:1px solid var(--border-color);" required>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:16px; margin-bottom:16px;">
+            <div>
+              <label>เรื่อง:</label>
+              <input type="text" id="form-subject" class="btn" style="width:100%; border:1px solid var(--border-color);" required>
+            </div>
+            <div>
+              <label>ระดับความด่วน:</label>
+              <select id="form-urgency" class="btn" style="width:100%; border:1px solid var(--border-color);">
+                <option value="ปกติ">ปกติ</option>
+                <option value="ด่วน">ด่วน</option>
+                <option value="ด่วนมาก">ด่วนมาก</option>
+                <option value="ด่วนที่สุด">ด่วนที่สุด</option>
+              </select>
+            </div>
+            <div>
+              <label>วันที่:</label>
+              <input type="date" id="form-date" class="btn" style="width:100%; border:1px solid var(--border-color);">
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; margin-bottom:16px;">
+            <div>
+              <label>เรียน (ผู้รับ):</label>
+              <input type="text" id="form-to" class="btn" style="width:100%; border:1px solid var(--border-color);" required>
+            </div>
+            <div>
+              <label>ประเภทหนังสือ:</label>
+              <select id="form-category" class="btn" style="width:100%; border:1px solid var(--border-color);">
+                <option value="บันทึกข้อความ">บันทึกข้อความ</option>
+                <option value="หนังสือภายนอก">หนังสือภายนอก</option>
+                <option value="คำสั่ง">คำสั่ง</option>
+                <option value="ประกาศ">ประกาศ</option>
+              </select>
+            </div>
+            <div>
+              <label>จัดเก็บเข้าแฟ้ม:</label>
+              <select id="form-folder" class="btn" style="width:100%; border:1px solid var(--border-color);">
+                <option value="แฟ้มอนุมัติประจำปี">แฟ้มอนุมัติประจำปี</option>
+                <option value="แฟ้มคำสั่ง">แฟ้มคำสั่ง</option>
+                <option value="แฟ้มโครงการพิเศษ">แฟ้มโครงการพิเศษ</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label>รายละเอียดข้อความในหนังสือ (รองรับ HTML/Text):</label>
+            <textarea id="form-body" rows="8" class="btn" style="width:100%; border:1px solid var(--border-color); text-align:left;" required></textarea>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:20px;">
+            <div>
+              <label>ชื่อ-นามสกุล ผู้เสนอลงนาม:</label>
+              <input type="text" id="form-signer-name" class="btn" style="width:100%; border:1px solid var(--border-color);" placeholder="(นายสมชาย ใจดี)">
+            </div>
+            <div>
+              <label>ตำแหน่งผู้เสนอลงนาม:</label>
+              <input type="text" id="form-signer-pos" class="btn" style="width:100%; border:1px solid var(--border-color);" placeholder="หัวหน้าฝ่ายสารบรรณดิจิทัล">
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:12px;">
+            <button type="button" class="btn btn-secondary" onclick="switchView('dashboard')">ยกเลิก</button>
+            <button type="submit" class="btn btn-primary">💾 บันทึกและเสนอเรื่องต่อตาม Workflow</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- VIEW 3: ARCHIVE -->
+    <div id="view-archive" class="view-panel" style="display:none;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">📁 แฟ้มจัดเก็บเอกสารดิจิทัล (e-Archive Cabinet)</h2>
+        </div>
+        <p class="text-muted">ระบบจัดเก็บหนังสือที่เสร็จสิ้นภารกิจและลงนามเรียบร้อย แยกตามหมวดหมู่และค้นหาแบบ Full-text Search</p>
+        <br>
+        <div class="table-wrapper">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>เลขที่หนังสือ</th>
+                <th>เรื่อง</th>
+                <th>แฟ้มที่จัดเก็บ</th>
+                <th>ผู้ลงนามอนุมัติ</th>
+                <th>ดาวน์โหลด/พิมพ์</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>คำสั่งที่ ๔๕/๒๕๖๙</td>
+                <td>แต่งตั้งคณะทำงานตรวจรับระบบ e-Sarabun Cloud</td>
+                <td>📁 แฟ้มคำสั่ง</td>
+                <td>ดร.วิชัย รัตนประเสริฐ (อธิบดี)</td>
+                <td>
+                  <button class="btn btn-secondary" onclick="openDocDetail('DOC-1002')">👁️ ดูเอกสาร</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DOCUMENT DETAIL & APPROVAL WORKFLOW MODAL -->
+  <div id="doc-detail-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width:850px; max-height:90vh; overflow-y:auto;">
+      <div class="card-header">
+        <h3 id="modal-doc-title" style="font-size:1.1rem; color:var(--primary-color);">รายละเอียดเอกสาร</h3>
+        <button class="btn btn-secondary" onclick="closeDocModal()">❌ ปิด</button>
+      </div>
+
+      <!-- Action Bar (Word Export / Print / Workflow) -->
+      <div class="action-bar" style="display:flex; justify-content:space-between; gap:8px; margin-bottom:16px; background:#F8FAFC; padding:12px; border-radius:8px;">
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-success" onclick="exportDocxCurrent()">📥 ดาวน์โหลดไฟล์ Word (.docx)</button>
+          <button class="btn btn-primary" onclick="printMemoCurrent()">🖨️ สั่งพิมพ์ (Print A4)</button>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-secondary" onclick="openSignatureModal()">🖋️ เกษียน/วาดลายเซ็น</button>
+          <button class="btn btn-danger" onclick="rejectCurrentDoc()">↩️ ตีกลับแก้ไข (Reject)</button>
+          <button class="btn btn-success" onclick="approveCurrentDoc()">✓ อนุมัติ/ส่งต่อ</button>
+        </div>
+      </div>
+
+      <!-- Workflow Visual Step Bar -->
+      <div id="workflow-timeline-bar"></div>
+
+      <!-- PRINTABLE A4 MEMO CONTAINER -->
+      <div id="printable-memo-area" style="background:white; padding:30px; border:1px solid #CBD5E1; border-radius:8px; margin-bottom:20px; color:#000;">
+        <!-- Dynamically rendered via app.js -->
+      </div>
+
+      <!-- Audit Trail / History Log -->
+      <div class="history-section">
+        <h4 style="margin-bottom:8px;">📜 ประวัติการเสนอเรื่องและการเกษียนสั่งการ</h4>
+        <div id="history-log-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIGITAL SIGNATURE CANVAS MODAL -->
+  <div id="sig-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="card-header">
+        <h3>🖋️ ลงนามอิเล็กทรอนิกส์ & พิมพ์เกษียนหนังสือ</h3>
+        <button class="btn btn-secondary" onclick="closeSigModal()">❌</button>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <label style="font-weight:600;">วาดลายเซ็นดิจิทัล (Digital Signature Pad):</label>
+        <div style="border:2px dashed var(--primary-color); border-radius:8px; text-align:center; background:#FAFAFA;">
+          <canvas id="sig-canvas" width="500" height="150" style="touch-action:none;"></canvas>
+        </div>
+        <div style="text-align:right; margin-top:4px;">
+          <button class="btn btn-secondary" style="padding:4px 8px; font-size:0.8rem;" onclick="signatureEngine.clearCanvas()">ล้างลายเซ็น</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-weight:600;">พิมพ์ข้อความสั่งการ/เกษียนหนังสือ:</label>
+        <textarea id="enote-input" rows="2" class="btn" style="width:100%; border:1px solid var(--border-color);" placeholder="เช่น อนุมัติตามเสนอ, ทราบ ดำเนินการตามระเบียบ"></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:8px;">
+        <button class="btn btn-secondary" onclick="closeSigModal()">ยกเลิก</button>
+        <button class="btn btn-primary" onclick="saveSignatureAndNote()">💾 บันทึกลายเซ็นลงบนเอกสาร</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/templates.js"></script>
+  <script src="js/signature.js"></script>
+  <script src="js/workflow.js"></script>
+  <script src="js/docx-export.js"></script>
+  <script src="js/cloudflare-db.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

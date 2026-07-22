@@ -1,0 +1,111 @@
+/* CSS Precision Print Engine for e-Sarabun
+   Strict adherence to Office of the Prime Minister Regulations on Government Correspondence
+   A4 Paper Size, Top 2.5cm, Left 3.0cm, Right 2.0cm, Bottom 2.0cm
+*/
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 2.5cm 2.0cm 2.0cm 3.0cm; /* Top, Right, Bottom, Left */
+  }
+
+  /* Hide all non-essential UI elements during printing */
+  body * {
+    visibility: hidden;
+  }
+
+  .navbar,
+  .nav-links,
+  .btn,
+  .grid-stats,
+  .card-header,
+  .no-print,
+  .modal-overlay,
+  .history-section,
+  .action-bar {
+    display: none !important;
+    height: 0 !important;
+  }
+
+  /* Reveal printable memo area */
+  #printable-memo-area,
+  #printable-memo-area * {
+    visibility: visible;
+  }
+
+  #printable-memo-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+    font-family: 'TH Sarabun PSK', 'Angsana New', sans-serif !important;
+    font-size: 16pt !important;
+    line-height: 1.2 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .print-garuda {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .print-garuda svg,
+  .print-garuda img {
+    width: 3cm !important;
+    height: 3cm !important;
+  }
+
+  .print-header-title {
+    font-size: 29pt !important;
+    font-weight: bold !important;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .print-meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+  }
+
+  .print-meta-table td {
+    padding: 3px 0;
+    vertical-align: top;
+    font-size: 16pt !important;
+  }
+
+  .print-divider {
+    border: none;
+    border-top: 1.5pt solid black;
+    margin: 12px 0 16px 0;
+  }
+
+  .print-body {
+    font-size: 16pt !important;
+    text-align: justify;
+    text-justify: inter-cluster;
+    line-height: 1.35 !important;
+  }
+
+  .print-signature-box {
+    margin-top: 45px;
+    float: right;
+    width: 50%;
+    text-align: center;
+    font-size: 16pt !important;
+    page-break-inside: avoid;
+  }
+
+  .print-stamp {
+    border: 1px solid black !important;
+    background: none !important;
+    padding: 8px !important;
+    margin-top: 15px !important;
+    font-size: 14pt !important;
+  }
+}
