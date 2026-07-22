@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>กระดาษเขียนข่าว</title>
+    <style>
+        @font-face {
+            font-family: 'THSarabunPSK';
+            src: local('TH Sarabun PSK'), local('THSarabunPSK');
+        }
+        body {
+            background: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 1.5cm;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            font-family: 'THSarabunPSK', sans-serif;
+            font-size: 16pt;
+            color: #000;
+            box-sizing: border-box;
+        }
+        .text-red { color: red; font-weight: bold; }
+        .text-center { text-align: center; }
+        
+        /* สไตล์ตารางแบบทหาร */
+        table.msg-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table.msg-table th, table.msg-table td {
+            border: 1px solid #000;
+            padding: 4px 8px;
+            vertical-align: top;
+        }
+        .no-border-bottom { border-bottom: none !important; }
+        .no-border-top { border-top: none !important; }
+        
+        .header-title { font-size: 24pt; font-weight: bold; text-align: center; margin-bottom: 0;}
+    </style>
+</head>
+<body>
+
+<div class="a4-page">
+    <div style="position: relative;">
+        <div class="header-title">กระดาษเขียนข่าว</div>
+        <div style="position: absolute; right: 0; top: 0;">ทบ.๕๒๓ - ๐๐๗</div>
+        <div>แบบ สส.๖</div>
+        <div>สำหรับเจ้าหน้าที่ศูนย์การสื่อสาร........................................................................................... ที่..........................</div>
+    </div>
+
+    <table class="msg-table">
+        <tr>
+            <td style="width: 25%;">ความเร่งด่วน-ผู้รับปฏิบัติ<br><span class="text-red" style="font-size: 24pt;">ด่วนมาก</span></td>
+            <td style="width: 25%;">ความเร่งด่วน-ผู้รับทราบ</td>
+            <td style="width: 25%;">หมู่ วัน-เวลา<br><span style="margin-left: 20px;">ก.ค. ๖๙</span></td>
+            <td style="width: 25%;" class="text-center">คำแนะนำ</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="no-border-bottom">จาก&nbsp;&nbsp;&nbsp;&nbsp;พล.ร.๔</td>
+            <td rowspan="2">หมู่ที่/คำ</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="no-border-top no-border-bottom">ถึง&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผู้รับปฏิบัติ&nbsp;&nbsp;&nbsp;&nbsp;กกล.นเรศวร, ร.๔ พัน.๒, ป.๔ พัน.๑๐๔</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="no-border-top" style="padding-bottom: 20px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผู้รับทราบ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ร.๔, ป.๔
+            </td>
+            <td>ประเภทเอกสาร<br><span class="text-red" style="font-size: 24pt; display: block; text-align: center;">ลับมาก</span><hr style="margin: 2px 0; border: 0; border-top: 1px solid #000;">ที่ของผู้ให้ข่าว<br>ที่ กห ๐๔๘๓.๑/</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="height: 350px;"> <!-- พื้นที่สำหรับเนื้อหาข่าว -->
+                <div style="padding: 10px 30px;">
+                    ๑. ด้วย ทภ.๒/ศปก.ทภ.๒ กำหนดจัดการประชุมชี้แจงแนวความคิดการปฏิบัติ ตามคำสั่งจักรพงษ์ภูวนาถ ๖๙๒ - ทบ. เพื่อให้หน่วยขึ้นตรง...
+                    <br><br>
+                    ๒. ตามข้อ ๑ ให้หน่วยดำเนินการดังนี้<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;๒.๑ หน่วย อรบ.กกล.นเรศวร (โดยการประสาน)...<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;๒.๒ ร.๔ พัน.๒ และ ป.๔ พัน.๑๐๔ ให้ ผบ.หน่วย...<br>
+                    <br>
+                    ๓. สำหรับรายละเอียดเพิ่มเติมประสาน ฝยก.พล.ร.๔ โทร.ทบ.๗๓๒๖๔
+                    <div style="text-align: center; margin-top: 20px;">---------------------------------------------</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="msg-table" style="border-top: none; margin-top: 0;">
+        <tr>
+            <td rowspan="2" style="width: 25%; border-top: none; vertical-align: middle;">หน้า ๑ ใน ๑ หน้า</td>
+            <td style="width: 35%; border-top: none;" class="text-center">อ้างถึงข่าว</td>
+            <td colspan="3" style="border-top: none;">ชื่อผู้เขียนข่าว<br>พ.ท.<br>&nbsp;&nbsp;&nbsp;&nbsp;(สาธิต สุขสวัสดิ์)<br>&nbsp;&nbsp;&nbsp;&nbsp;หน.ฝยก.พล.ร.๔</td>
+            <td style="border-top: none;" class="text-center">หน่วย<br>ฝยก.พล.ร.๔</td>
+            <td style="border-top: none;" class="text-center">โทรทหาร<br>๗๓๒๖๔</td>
+        </tr>
+        <tr>
+            <td class="text-center">จัดประเภทเอกสาร<br>
+                <div style="display: flex; justify-content: center; gap: 40px; margin-top: 5px;">
+                    <div>จัด<br><div style="width:30px; height:15px; border:1px solid #000;"></div></div>
+                    <div>ไม่<br><div style="width:30px; height:15px; border:1px solid #000;"></div></div>
+                </div>
+            </td>
+            <!-- ช่องเซ็นชื่อ -->
+            <td style="width: 10%;">วันที่</td>
+            <td style="width: 10%;">เวลา</td>
+            <td style="width: 10%;">ระบบเครื่องสื่อสาร</td>
+            <td style="width: 10%;">ชื่อพนักงาน</td>
+            <td style="width: 30%;" rowspan="2">
+                อนุมัติให้ส่งข่าวได้<br><br><br><br>
+                พ.อ.<br>
+                <div style="text-align: center;">(พงศธร นิพภยะ)</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
