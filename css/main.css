@@ -92,6 +92,64 @@ body {
   background-color: rgba(255, 255, 255, 0.15);
   color: white;
 }
+/* จัดการรูปแบบเอกสาร บันทึกข้อความ */
+.sarabun-doc {
+    font-family: 'THSarabunPSK', sans-serif;
+    font-size: 16pt; /* ขนาดอักษรมาตรฐาน */
+    color: black;
+    line-height: 1.15;
+    text-align: left;
+}
+
+.doc-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* ขนาดตราครุฑสำหรับบันทึกข้อความ ต้องสูง 1.5 ซม. */
+.krut-logo {
+    height: 1.5cm; 
+    width: auto;
+    margin-right: 15px;
+}
+
+/* คำว่า บันทึกข้อความ ใช้ตัวหนา 29pt */
+.doc-title {
+    font-size: 29pt;
+    font-weight: bold;
+    margin: 0;
+}
+
+.doc-info p {
+    margin: 0 0 5px 0;
+}
+
+.doc-row {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.doc-half {
+    width: 50%;
+}
+
+.doc-data {
+    margin-left: 10px;
+}
+
+/* เส้นคั่น */
+.doc-divider {
+    border: none;
+    border-top: 1px solid black;
+    margin: 10px 0 15px 0;
+}
+
+/* ระยะย่อหน้าปกติ (Tab) */
+.paragraph-indent {
+    text-indent: 2.5cm;
+    margin-top: 0;
+}
 
 /* Layout Container */
 .container {
