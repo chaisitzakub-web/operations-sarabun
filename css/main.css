@@ -379,3 +379,106 @@ table.doc-table tr:hover {
 }
 .history-time { color: var(--text-muted); }
 .history-note { font-size: 0.9rem; margin-top: 4px; font-style: italic; }
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>บันทึกข้อความ ลับมาก/ด่วนมาก</title>
+    <style>
+        @font-face {
+            font-family: 'THSarabunPSK';
+            src: local('TH Sarabun PSK'), local('THSarabunPSK');
+            /* แนะนำให้ใส่ path ไฟล์ฟอนต์ .ttf ของคุณที่นี่เผื่อเครื่องผู้ใช้ไม่มีฟอนต์ */
+        }
+        body {
+            background: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 2cm 2cm 2cm 3cm; /* บน ขวา ล่าง ซ้าย */
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            font-family: 'THSarabunPSK', sans-serif;
+            font-size: 16pt;
+            line-height: 1.15;
+            color: #000;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .text-red { color: red; font-weight: bold; }
+        .text-center { text-align: center; }
+        
+        /* ส่วนหัวเรื่อง */
+        .secret-top { font-size: 32pt; text-align: center; margin-bottom: -10px; }
+        .header-grid { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 10px; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .garuda-placeholder { width: 1.38cm; height: 1.5cm; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 10pt; }
+        .urgent-text { font-size: 32pt; }
+        .title-text { font-size: 29pt; font-weight: bold; letter-spacing: 2px; }
+        
+        /* ฟอร์มรับข้อมูล */
+        .form-row { display: flex; margin-bottom: 5px; }
+        .dotted-line { flex-grow: 1; border-bottom: 1px dotted #000; margin: 0 5px; position: relative; top: -5px; display: inline-block;}
+        .indent-1 { padding-left: 2.5cm; }
+        .indent-2 { padding-left: 3.5cm; }
+        
+        /* ลายเซ็น */
+        .signature-box { margin-top: 3cm; margin-left: 50%; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="a4-page">
+    <div class="text-red secret-top">ลับมาก</div>
+    
+    <div class="header-grid">
+        <div class="logo-area">
+            <div class="garuda-placeholder">ครุฑ</div>
+            <div class="text-red urgent-text">ด่วนมาก</div>
+        </div>
+        <div class="title-text">บันทึกข้อความ</div>
+        <div><!-- Spacer --></div>
+    </div>
+
+    <div class="form-row">
+        <span style="font-size: 20pt; font-weight: bold;">ส่วนราชการ</span>
+        <span class="dotted-line" style="flex: 2;">ฝยก.พล.ร.๔ (โทร ๗๓๒๖๔)</span>
+    </div>
+    <div class="form-row">
+        <span style="font-size: 20pt; font-weight: bold;">ที่</span>
+        <span class="dotted-line" style="flex: 1;">กห ๐๔๘๓.๑/ฝยก.</span>
+        <span style="font-size: 20pt; font-weight: bold; margin-left: 10px;">วันที่</span>
+        <span class="dotted-line" style="flex: 1;">ก.ค. ๖๙</span>
+    </div>
+    <div class="form-row">
+        <span style="font-size: 20pt; font-weight: bold;">เรื่อง</span>
+        <span class="dotted-line">การประชุมชี้แจงแนวความคิดการปฏิบัติ ตามคำสั่งจักรพงษ์ภูวนาถ ๖๙๒ - ทบ.</span>
+    </div>
+
+    <div style="margin-top: 15px;">เรียน ผบ.พล.ร.๔</div>
+    
+    <div style="display: flex; margin-top: 10px;">
+        <div>สิ่งที่ส่งมาด้วย</div>
+        <div style="margin-left: 10px;">
+            วิทยุราชการ ทภ.๒/ศปก.ทภ.๒ ลับมาก ด่วนมาก ที่ กห ๐๔๘๒/๑๐๙๙<br>
+            ลง ๑๘ ก.ค. ๖๙ <span style="float: right;">จำนวน ๑ ชุด</span>
+        </div>
+    </div>
+
+    <div class="indent-1" style="margin-top: 15px;">
+        ๑. ด้วย ทภ.๒/ศปก.ทภ.๒ กำหนดจัดการประชุมชี้แจงแนวความคิดการปฏิบัติ ตามคำสั่งจักรพงษ์ภูวนาถ ๖๙๒ - ทบ. เพื่อให้หน่วยขึ้นตรง, หน่วยขึ้นควบคุมทางยุทธการ และหน่วยที่จะใช้กำลังตามคำสั่งฯ ทราบ สามารถเตรียมความพร้อมรองรับสถานการณ์ให้มีความประสานสอดคล้อง และเกิดประสิทธิภาพสูงสุด...
+    </div>
+
+    <div class="signature-box">
+        <div>พ.ท.</div>
+        <div style="margin-top: 1.5cm;">(สาธิต สุขสวัสดิ์)</div>
+        <div>หน.ฝยก.พล.ร.๔</div>
+    </div>
+</div>
+
+</body>
+</html>
