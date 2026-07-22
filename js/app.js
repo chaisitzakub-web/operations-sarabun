@@ -191,32 +191,52 @@ async function openDocDetail(docId) {
   historyDiv.innerHTML = WorkflowEngine.renderHistoryLog(currentDoc.history || []);
 
  previewDiv.innerHTML = `
-    <div class="sarabun-doc">
-        <div class="doc-header">
-            <!-- ดึงรูปตราครุฑจากโฟลเดอร์ images -->
-            <img src="images/krut.png" class="krut-logo" alt="ตราครุฑ">
-            <h1 class="doc-title">บันทึกข้อความ</h1>
-        </div>
+    <div class="sarabun-doc" style="font-family: 'THSarabunPSK', sans-serif; font-size: 16pt; color: #000; line-height: 1.15;">
         
-        <div class="doc-info">
-            <p><b>ส่วนราชการ</b> <span class="doc-data">${currentDoc.deptName || ''}</span></p>
-            <div class="doc-row">
-                <p class="doc-half"><b>ที่</b> <span class="doc-data">${currentDoc.docNo || '-'}</span></p>
-                <p class="doc-half"><b>วันที่</b> <span class="doc-data">${currentDoc.date || '-'}</span></p>
+        <!-- ส่วนหัว: ครุฑ และ บันทึกข้อความ -->
+        <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+            <!-- ขนาดตราครุฑสำหรับบันทึกข้อความ กว้าง 1.38 ซม. สูง 1.5 ซม. -->
+            <img src="images/krut.png" alt="ตราครุฑ" style="width: 1.38cm; height: 1.5cm; object-fit: contain;">
+            
+            <!-- คำว่า บันทึกข้อความ จัดให้อยู่กึ่งกลางหน้า -->
+            <div style="flex-grow: 1; text-align: center; font-size: 29pt; font-weight: bold; line-height: 1; margin-top: 10px; margin-left: -1.38cm;">
+                บันทึกข้อความ
             </div>
-            <p><b>เรื่อง</b> <span class="doc-data">${currentDoc.subject || ''}</span></p>
-            <p><b>เรียน</b> <span class="doc-data">${currentDoc.to || ''}</span></p>
         </div>
         
-        <hr class="doc-divider">
+        <!-- ส่วนข้อมูล: ส่วนราชการ, ที่, วันที่, เรื่อง -->
+        <div style="display: flex; align-items: baseline; margin-bottom: 8px;">
+            <span style="font-size: 20pt; font-weight: bold; margin-right: 15px;">ส่วนราชการ</span>
+            <span style="flex-grow: 1;">${currentDoc.deptName || ''}</span>
+        </div>
         
-        <div class="doc-body">
+        <div style="display: flex; align-items: baseline; margin-bottom: 8px;">
+            <span style="font-size: 20pt; font-weight: bold; margin-right: 15px;">ที่</span>
+            <span style="width: 45%;">${currentDoc.docNo || '-'}</span>
+            <!-- กึ่งกลางหน้ากระดาษพอดี -->
+            <span style="font-size: 20pt; font-weight: bold; margin-right: 15px;">วันที่</span>
+            <span style="flex-grow: 1;">${currentDoc.date || '-'}</span>
+        </div>
+        
+        <div style="display: flex; align-items: baseline; margin-bottom: 16px;">
+            <span style="font-size: 20pt; font-weight: bold; margin-right: 15px;">เรื่อง</span>
+            <span style="flex-grow: 1;">${currentDoc.subject || ''}</span>
+        </div>
+        
+        <!-- คำขึ้นต้น: เรียน (ระยะห่าง Before 6 pt) -->
+        <div style="margin-bottom: 16px; padding-top: 6pt;">
+            <span style="font-size: 16pt;"><b>เรียน</b></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${currentDoc.to || ''}
+        </div>
+        
+        <!-- เนื้อหา: ย่อหน้า 2.5 ซม. (ระยะห่าง Before 6 pt) -->
+        <!-- หมายเหตุ: หากมีการขึ้นบรรทัดใหม่ในช่องกรอกข้อมูล จะต้องใส่คลาสจัดย่อหน้านี้ในทุก <p> -->
+        <div class="doc-body" style="text-indent: 2.5cm; text-align: justify; margin-bottom: 16px; padding-top: 6pt;">
             ${currentDoc.body || ''}
         </div>
 
         ${currentDoc.eNoteText ? SignatureEngine.createStampBadge(currentDoc.eNoteText) : ''}
 
-        <!-- ส่วนของลายเซ็นและชื่อตำแหน่ง จัดชิดขวาตามระเบียบ -->
+        <!-- ลายเซ็น: จัดชิดขวา เริ่มที่กึ่งกลางหน้ากระดาษ (เว้น 3 Enter ตามระเบียบ) -->
         <div class="signature-box" style="margin-top: 3cm; margin-left: 50%; text-align: center;">
             ${currentDoc.signatureDataUrl ? `<img src="${currentDoc.signatureDataUrl}" style="max-height:60px;" /><br>` : '<br><br>'}
             <p style="margin: 0;">${currentDoc.signerName || ''}</p>
