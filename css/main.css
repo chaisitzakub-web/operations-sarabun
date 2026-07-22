@@ -482,3 +482,17 @@ table.doc-table tr:hover {
 
 </body>
 </html>
+/* นำเข้าฟอนต์ TH Sarabun PSK จากโฟลเดอร์ fonts */
+@font-face {
+    font-family: 'THSarabunPSK';
+    src: url('../fonts/THSarabun_0.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'THSarabunPSK';
+    src: url('../fonts/THSarabun Bold_0.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
