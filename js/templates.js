@@ -3,16 +3,7 @@
  * Standard Thai Government Document Formats (ระเบียบสำนักนายกรัฐมนตรีว่าด้วยงานสารบรรณ)
  */
 
-const GARUDA_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="100" height="100" class="garuda-logo">
-  <g fill="#A61C1C">
-    <!-- Stylized Garuda Emblem for Official Thai Government Memos -->
-    <path d="M150,20 C160,40 180,50 200,45 C190,65 210,80 230,75 C210,95 235,110 250,115 C230,130 215,150 190,140 C195,160 175,170 150,175 C125,170 105,160 110,140 C85,150 70,130 50,115 C65,110 90,95 70,75 C90,80 110,65 100,45 C120,50 140,40 150,20 Z" />
-    <path d="M150,60 C165,75 165,95 150,110 C135,95 135,75 150,60 Z" fill="#D92B2B"/>
-    <path d="M150,175 L165,260 L150,280 L135,260 Z" />
-    <path d="M120,180 C135,210 165,210 180,180 C195,220 220,240 255,245 C220,260 180,250 150,280 C120,250 80,260 45,245 C80,240 105,220 120,180 Z" />
-    <circle cx="150" cy="50" r="10" fill="#FFD700"/>
-  </g>
-</svg>`;
+const GARUDA_SVG = `<img src="images/krut.png" class="krut-logo" alt="ตราครุฑ">`;
 
 const DOCUMENT_TEMPLATES = {
   internal_memo: {

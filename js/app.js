@@ -190,42 +190,38 @@ async function openDocDetail(docId) {
   workflowBar.innerHTML = WorkflowEngine.getStepTimeline(currentDoc.status);
   historyDiv.innerHTML = WorkflowEngine.renderHistoryLog(currentDoc.history || []);
 
-  previewDiv.innerHTML = `
-    <div class="print-garuda">
-      ${GARUDA_SVG}
-    </div>
-    <div class="print-header-title">บันทึกข้อความ</div>
-    <table class="print-meta-table">
-      <tr>
-        <td style="width:15%; font-weight:bold;">ส่วนราชการ</td>
-        <td>${currentDoc.deptName || 'สำนักบริหารกลาง'}</td>
-      </tr>
-      <tr>
-        <td style="font-weight:bold;">ที่</td>
-        <td style="width:45%;">${currentDoc.docNo || '-'}</td>
-        <td style="font-weight:bold; text-align:right;">วันที่</td>
-        <td>${currentDoc.date || '-'}</td>
-      </tr>
-      <tr>
-        <td style="font-weight:bold;">เรื่อง</td>
-        <td colspan="3" style="font-weight:bold;">${currentDoc.subject || ''}</td>
-      </tr>
-      <tr>
-        <td style="font-weight:bold;">เรียน</td>
-        <td colspan="3">${currentDoc.to || ''}</td>
-      </tr>
-    </table>
-    <hr class="print-divider" />
-    <div class="print-body">
-      ${currentDoc.body || ''}
-    </div>
+ previewDiv.innerHTML = `
+    <div class="sarabun-doc">
+        <div class="doc-header">
+            <!-- ดึงรูปตราครุฑจากโฟลเดอร์ images -->
+            <img src="images/krut.png" class="krut-logo" alt="ตราครุฑ">
+            <h1 class="doc-title">บันทึกข้อความ</h1>
+        </div>
+        
+        <div class="doc-info">
+            <p><b>ส่วนราชการ</b> <span class="doc-data">${currentDoc.deptName || ''}</span></p>
+            <div class="doc-row">
+                <p class="doc-half"><b>ที่</b> <span class="doc-data">${currentDoc.docNo || '-'}</span></p>
+                <p class="doc-half"><b>วันที่</b> <span class="doc-data">${currentDoc.date || '-'}</span></p>
+            </div>
+            <p><b>เรื่อง</b> <span class="doc-data">${currentDoc.subject || ''}</span></p>
+            <p><b>เรียน</b> <span class="doc-data">${currentDoc.to || ''}</span></p>
+        </div>
+        
+        <hr class="doc-divider">
+        
+        <div class="doc-body">
+            ${currentDoc.body || ''}
+        </div>
 
-    ${currentDoc.eNoteText ? SignatureEngine.createStampBadge(currentDoc.eNoteText) : ''}
+        ${currentDoc.eNoteText ? SignatureEngine.createStampBadge(currentDoc.eNoteText) : ''}
 
-    <div class="print-signature-box">
-      ${currentDoc.signatureDataUrl ? `<img src="${currentDoc.signatureDataUrl}" style="max-height:60px;" /><br>` : '<br><br>'}
-      <div>${currentDoc.signerName || ''}</div>
-      <div>${currentDoc.signerPosition || ''}</div>
+        <!-- ส่วนของลายเซ็นและชื่อตำแหน่ง จัดชิดขวาตามระเบียบ -->
+        <div class="signature-box" style="margin-top: 3cm; margin-left: 50%; text-align: center;">
+            ${currentDoc.signatureDataUrl ? `<img src="${currentDoc.signatureDataUrl}" style="max-height:60px;" /><br>` : '<br><br>'}
+            <p style="margin: 0;">${currentDoc.signerName || ''}</p>
+            <p style="margin: 0;">${currentDoc.signerPosition || ''}</p>
+        </div>
     </div>
   `;
 
